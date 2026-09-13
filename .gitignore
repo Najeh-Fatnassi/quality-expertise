@@ -4,3 +4,7 @@ deployments.json
 project_info.json
 filetree.json
 .download-source.js
+node_modules
+.output
+.wrangler
+.vercel/.env.development.local

@@ -1,1 +1,22 @@
-aW1wb3J0IHsgY3JlYXRlU3RhcnQsIGNyZWF0ZU1pZGRsZXdhcmUgfSBmcm9tICJAdGFuc3RhY2svcmVhY3Qtc3RhcnQiOwoKaW1wb3J0IHsgcmVuZGVyRXJyb3JQYWdlIH0gZnJvbSAiLi9saWIvZXJyb3ItcGFnZSI7Cgpjb25zdCBlcnJvck1pZGRsZXdhcmUgPSBjcmVhdGVNaWRkbGV3YXJlKCkuc2VydmVyKGFzeW5jICh7IG5leHQgfSkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gYXdhaXQgbmV4dCgpOwogIH0gY2F0Y2ggKGVycm9yKSB7CiAgICBpZiAoZXJyb3IgIT0gbnVsbCAmJiB0eXBlb2YgZXJyb3IgPT09ICJvYmplY3QiICYmICJzdGF0dXNDb2RlIiBpbiBlcnJvcikgewogICAgICB0aHJvdyBlcnJvcjsKICAgIH0KICAgIGNvbnNvbGUuZXJyb3IoZXJyb3IpOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZShyZW5kZXJFcnJvclBhZ2UoKSwgewogICAgICBzdGF0dXM6IDUwMCwKICAgICAgaGVhZGVyczogeyAiY29udGVudC10eXBlIjogInRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIgfSwKICAgIH0pOwogIH0KfSk7CgpleHBvcnQgY29uc3Qgc3RhcnRJbnN0YW5jZSA9IGNyZWF0ZVN0YXJ0KCgpID0+ICh7CiAgcmVxdWVzdE1pZGRsZXdhcmU6IFtlcnJvck1pZGRsZXdhcmVdLAp9KSk7Cg==
+import { createStart, createMiddleware } from "@tanstack/react-start";
+
+import { renderErrorPage } from "./lib/error-page";
+
+const errorMiddleware = createMiddleware().server(async ({ next }) => {
+  try {
+    return await next();
+  } catch (error) {
+    if (error != null && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
+    console.error(error);
+    return new Response(renderErrorPage(), {
+      status: 500,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
+  }
+});
+
+export const startInstance = createStart(() => ({
+  requestMiddleware: [errorMiddleware],
+}));
