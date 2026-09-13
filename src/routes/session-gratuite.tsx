@@ -27,6 +27,7 @@ import {
   MessageCircle,
   ArrowRight,
 } from "lucide-react";
+import { buildMeta } from "@/lib/seo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -62,31 +63,17 @@ const FORMATION_OPTIONS = [
 ] as const;
 
 export const Route = createFileRoute("/session-gratuite")({
-  head: () => ({
-    meta: [
-      { title: "Quality Expertise — Quality Testing × Intelligence Artificielle" },
-      {
-        name: "description",
-        content:
-          "Session gratuite en ligne le dimanche 26 juillet 2026 à 17h00. ISTQB CTFL v4.0, CT-GenAI, Playwright & Cypress avec Najeh Fatnassi.",
-      },
-      {
-        property: "og:title",
-        content: "Quality Expertise — Quality Testing × Intelligence Artificielle",
-      },
-      {
-        property: "og:description",
-        content:
-          "Session gratuite en ligne le dimanche 26 juillet 2026 à 17h00. ISTQB CTFL v4.0, CT-GenAI, Playwright & Cypress avec Najeh Fatnassi.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildMeta({
+      title: "Quality Expertise — Quality Testing × Intelligence Artificielle",
+      description:
+        "Session gratuite en ligne le dimanche 19 septembre 2026 à 17h00. ISTQB CTFL v4.0, CT-GenAI, Playwright & Cypress avec Najeh Fatnassi.",
+      path: "/session-gratuite",
+    }),
   component: LandingPage,
 });
 
-const EVENT_DATE = new Date("2026-07-26T17:00:00+01:00");
+const EVENT_DATE = new Date("2026-09-19T17:00:00+01:00");
 
 type Lang = "en" | "fr";
 const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
@@ -105,7 +92,7 @@ const T = {
       quote: "“When manual testing meets machine intelligence”",
       countdown: { days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds" },
       cta: "Free Registration",
-      date: "07/26/2026",
+      date: "09/19/2026",
       time: "17:00 (Tunisia)",
       format: "Google Meet",
     },
@@ -124,7 +111,7 @@ const T = {
       eyebrow: "Practical info",
       title: "Join us online",
       items: [
-        { icon: "📅", label: "Date", main: "Sunday, July 26", sub: "2026" },
+        { icon: "📅", label: "Date", main: "Sunday, September 19", sub: "2026" },
         { icon: "🕗", label: "Time", main: "17:00 – 18:00", sub: "Tunisia time (GMT+1)" },
         { icon: "💻", label: "Format", main: "100% online", sub: "Via Google Meet" },
       ],
@@ -200,7 +187,7 @@ const T = {
       quote: "« Quand le test manuel rencontre l'intelligence des machines »",
       countdown: { days: "Jours", hours: "Heures", minutes: "Minutes", seconds: "Secondes" },
       cta: "Inscription gratuite",
-      date: "26/07/2026",
+      date: "19/09/2026",
       time: "17h00 (Tunisie)",
       format: "Google Meet",
     },
@@ -219,7 +206,7 @@ const T = {
       eyebrow: "Infos pratiques",
       title: "Rendez-vous en ligne",
       items: [
-        { icon: "📅", label: "Date", main: "Dimanche 26 juillet", sub: "2026" },
+        { icon: "📅", label: "Date", main: "Dimanche 19 septembre", sub: "2026" },
         { icon: "🕗", label: "Heure", main: "17h00 – 18h00", sub: "Heure de Tunisie (GMT+1)" },
         { icon: "💻", label: "Format", main: "100% en ligne", sub: "Via Google Meet" },
       ],

@@ -31,6 +31,9 @@ import {
 import qeIcon from "@/assets/qe-icon.png";
 import emmakLogo from "@/assets/emmak-logo.png";
 import istqbLogo from "@/assets/istqb-logo.png";
+import { buildMeta } from "@/lib/seo";
+import { testimonials } from "@/content/testimonials";
+import { resultStats, communityUrl } from "@/content/results";
 
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Rue+20+Mars%2C+Jawhara%2C+Sousse%2C+Tunisie";
@@ -53,7 +56,7 @@ const T = {
       faq: "FAQ",
       cta: "Book a Free Consultation",
     },
-    eventBanner: "🎓 Free session on July 26, 2026 — Sign up",
+    eventBanner: "🎓 Free session on September 19, 2026 — Sign up",
     hero: {
       badge: "ISTQB® · GenAI Edition · 100% Online",
       title1: "Get ISTQB® Certified.",
@@ -123,7 +126,7 @@ const T = {
       eyebrow: "Upcoming Event",
       title: "Quality Testing × Artificial Intelligence",
       sub: "Free online discovery session",
-      date: "Sunday, July 26, 2026",
+      date: "Sunday, September 19, 2026",
       time: "17:00 (Tunisia)",
       format: "Online · Google Meet",
       cta: "Reserve your seat",
@@ -173,7 +176,7 @@ const T = {
       faq: "FAQ",
       cta: "Réserver une consultation gratuite",
     },
-    eventBanner: "🎓 Session gratuite le 26 juillet 2026 — Je m'inscris",
+    eventBanner: "🎓 Session gratuite le 19 septembre 2026 — Je m'inscris",
     hero: {
       badge: "ISTQB® · Édition GenAI · 100% En ligne",
       title1: "Certifiez-vous ISTQB®.",
@@ -243,7 +246,7 @@ const T = {
       eyebrow: "Prochain événement",
       title: "Quality Testing × Intelligence Artificielle",
       sub: "Session de découverte gratuite en ligne",
-      date: "Dimanche 26 juillet 2026",
+      date: "Dimanche 19 septembre 2026",
       time: "17h00 (Tunisie)",
       format: "En ligne · Google Meet",
       cta: "Réserver ma place",
@@ -313,24 +316,13 @@ function LangSwitch() {
 }
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Quality Expertise — ISTQB® Training & QA Career Coaching" },
-      {
-        name: "description",
-        content:
-          "Online QA training and coaching: ISTQB® Foundation Level v4.0 (GenAI), AI-powered test automation master classes, and 1:1 career coaching.",
-      },
-      { property: "og:title", content: "Quality Expertise — ISTQB® Training & QA Coaching" },
-      {
-        property: "og:description",
-        content:
-          "Get ISTQB® certified and career-ready. Live training, GenAI test automation master classes, and 1:1 coaching.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildMeta({
+      title: "Quality Expertise — ISTQB® Training & QA Career Coaching",
+      description:
+        "Online QA training and coaching: ISTQB® Foundation Level v4.0 (GenAI), AI-powered test automation master classes, and 1:1 career coaching.",
+      path: "/",
+    }),
   component: Home,
 });
 
@@ -449,6 +441,30 @@ function Navbar() {
               {n.label}
             </a>
           ))}
+          <Link
+            to="/formations"
+            className="font-sans text-sm font-medium text-neutral-700 transition-colors hover:text-[color:var(--color-brand-violet)]"
+          >
+            Formations
+          </Link>
+          <Link
+            to="/services"
+            className="font-sans text-sm font-medium text-neutral-700 transition-colors hover:text-[color:var(--color-brand-violet)]"
+          >
+            Conseil &amp; Audit
+          </Link>
+          <Link
+            to="/blog"
+            className="font-sans text-sm font-medium text-neutral-700 transition-colors hover:text-[color:var(--color-brand-violet)]"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/evenements"
+            className="font-sans text-sm font-medium text-neutral-700 transition-colors hover:text-[color:var(--color-brand-violet)]"
+          >
+            Événements
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <LangSwitch />
@@ -489,6 +505,21 @@ function Navbar() {
                 >
                   {n.label}
                 </a>
+              ))}
+              {[
+                { to: "/formations" as const, label: "Formations" },
+                { to: "/services" as const, label: "Conseil & Audit" },
+                { to: "/blog" as const, label: "Blog" },
+                { to: "/evenements" as const, label: "Événements" },
+              ].map((n) => (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-2.5 font-sans text-sm font-medium text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-[color:var(--color-brand-violet)]"
+                >
+                  {n.label}
+                </Link>
               ))}
             </div>
             <Link
@@ -803,6 +834,45 @@ function UpcomingEvents() {
   );
 }
 
+function Results() {
+  return (
+    <Section id="results" eyebrow="Nos résultats" title="La qualité, mesurée." tone="beige">
+      <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {resultStats.map((stat, i) => (
+          <Reveal key={stat.label} delay={i * 80} className="text-center sm:text-left">
+            <div className="font-display text-3xl font-bold text-[color:var(--color-brand-violet)] md:text-4xl">
+              {stat.value}
+            </div>
+            <div className="mt-1 font-sans text-sm text-neutral-600">{stat.label}</div>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <Section id="testimonials" eyebrow="Témoignages" title="Ce qu'en disent nos apprenants.">
+      <div className="grid gap-6 sm:grid-cols-3">
+        {testimonials.map((item, i) => (
+          <Reveal
+            key={item.name}
+            delay={i * 100}
+            className="flex flex-col rounded-2xl border border-neutral-200 p-6"
+          >
+            <p className="flex-1 font-sans text-sm italic leading-relaxed text-neutral-700">
+              “{item.quote}”
+            </p>
+            <div className="mt-4 font-sans text-sm font-semibold text-neutral-900">{item.name}</div>
+            <div className="font-sans text-xs text-neutral-500">{item.role}</div>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 function FAQ() {
   const t = useT();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -852,7 +922,7 @@ function Footer() {
   ];
   return (
     <footer className="border-t border-neutral-200 bg-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-5">
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-4 max-w-sm font-sans text-sm leading-relaxed text-neutral-600">
@@ -896,6 +966,27 @@ function Footer() {
               </Reveal>
             ))}
           </ul>
+        </Reveal>
+        <Reveal delay={100}>
+          <div className="font-display text-sm font-bold text-neutral-900">Communauté</div>
+          <p className="mt-4 font-sans text-sm text-neutral-600">
+            Rejoignez le groupe des alumni Quality Expertise pour échanger avec d'autres
+            professionnels QA.
+          </p>
+          {communityUrl ? (
+            <a
+              href={communityUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center rounded-full border border-neutral-200 px-4 py-1.5 font-sans text-sm font-semibold text-[color:var(--color-brand-violet)] hover:border-[color:var(--color-brand-violet)]"
+            >
+              Rejoindre la communauté
+            </a>
+          ) : (
+            <span className="mt-3 inline-flex items-center rounded-full border border-neutral-200 px-4 py-1.5 font-sans text-sm font-medium text-neutral-400">
+              Bientôt disponible
+            </span>
+          )}
         </Reveal>
         <Reveal delay={120}>
           <div className="font-display text-sm font-bold text-neutral-900">{t.footer.partners}</div>
@@ -958,7 +1049,9 @@ function Home() {
           <Hero />
           <About />
           <Services />
+          <Results />
           <UpcomingEvents />
+          <Testimonials />
           <FAQ />
         </main>
         <Footer />

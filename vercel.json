@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "qualityexpertise.eu" }],
+      "destination": "https://www.qualityexpertise.eu",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "qualityexpertise.eu" }],
+      "destination": "https://www.qualityexpertise.eu/:path*",
+      "permanent": true
+    }
+  ]
+}

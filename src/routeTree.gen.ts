@@ -10,11 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EvenementsRouteImport } from './routes/evenements'
+import { Route as NajehRouteImport } from './routes/najeh'
+import { Route as RdvGratuitRouteImport } from './routes/rdv-gratuit'
 import { Route as SessionGratuiteRouteImport } from './routes/session-gratuite'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as FormationsIndexRouteImport } from './routes/formations/index'
+import { Route as FormationsIdRouteImport } from './routes/formations/$id'
+import { Route as ServicesIndexRouteImport } from './routes/services/index'
+import { Route as ServicesIdRouteImport } from './routes/services/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvenementsRoute = EvenementsRouteImport.update({
+  id: '/evenements',
+  path: '/evenements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NajehRoute = NajehRouteImport.update({
+  id: '/najeh',
+  path: '/najeh',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RdvGratuitRoute = RdvGratuitRouteImport.update({
+  id: '/rdv-gratuit',
+  path: '/rdv-gratuit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SessionGratuiteRoute = SessionGratuiteRouteImport.update({
@@ -22,31 +46,131 @@ const SessionGratuiteRoute = SessionGratuiteRouteImport.update({
   path: '/session-gratuite',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormationsIndexRoute = FormationsIndexRouteImport.update({
+  id: '/formations/',
+  path: '/formations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormationsIdRoute = FormationsIdRouteImport.update({
+  id: '/formations/$id',
+  path: '/formations/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIdRoute = ServicesIdRouteImport.update({
+  id: '/services/$id',
+  path: '/services/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/evenements': typeof EvenementsRoute
+  '/najeh': typeof NajehRoute
+  '/rdv-gratuit': typeof RdvGratuitRoute
   '/session-gratuite': typeof SessionGratuiteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/formations/$id': typeof FormationsIdRoute
+  '/services/$id': typeof ServicesIdRoute
+  '/blog/': typeof BlogIndexRoute
+  '/formations/': typeof FormationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/evenements': typeof EvenementsRoute
+  '/najeh': typeof NajehRoute
+  '/rdv-gratuit': typeof RdvGratuitRoute
   '/session-gratuite': typeof SessionGratuiteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/formations/$id': typeof FormationsIdRoute
+  '/services/$id': typeof ServicesIdRoute
+  '/blog': typeof BlogIndexRoute
+  '/formations': typeof FormationsIndexRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/evenements': typeof EvenementsRoute
+  '/najeh': typeof NajehRoute
+  '/rdv-gratuit': typeof RdvGratuitRoute
   '/session-gratuite': typeof SessionGratuiteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/formations/$id': typeof FormationsIdRoute
+  '/services/$id': typeof ServicesIdRoute
+  '/blog/': typeof BlogIndexRoute
+  '/formations/': typeof FormationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/session-gratuite'
+  fullPaths:
+    | '/'
+    | '/evenements'
+    | '/najeh'
+    | '/rdv-gratuit'
+    | '/session-gratuite'
+    | '/blog/$slug'
+    | '/formations/$id'
+    | '/services/$id'
+    | '/blog/'
+    | '/formations/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/session-gratuite'
-  id: '__root__' | '/' | '/session-gratuite'
+  to:
+    | '/'
+    | '/evenements'
+    | '/najeh'
+    | '/rdv-gratuit'
+    | '/session-gratuite'
+    | '/blog/$slug'
+    | '/formations/$id'
+    | '/services/$id'
+    | '/blog'
+    | '/formations'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/evenements'
+    | '/najeh'
+    | '/rdv-gratuit'
+    | '/session-gratuite'
+    | '/blog/$slug'
+    | '/formations/$id'
+    | '/services/$id'
+    | '/blog/'
+    | '/formations/'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EvenementsRoute: typeof EvenementsRoute
+  NajehRoute: typeof NajehRoute
+  RdvGratuitRoute: typeof RdvGratuitRoute
   SessionGratuiteRoute: typeof SessionGratuiteRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  FormationsIdRoute: typeof FormationsIdRoute
+  ServicesIdRoute: typeof ServicesIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  FormationsIndexRoute: typeof FormationsIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +182,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evenements': {
+      id: '/evenements'
+      path: '/evenements'
+      fullPath: '/evenements'
+      preLoaderRoute: typeof EvenementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/najeh': {
+      id: '/najeh'
+      path: '/najeh'
+      fullPath: '/najeh'
+      preLoaderRoute: typeof NajehRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rdv-gratuit': {
+      id: '/rdv-gratuit'
+      path: '/rdv-gratuit'
+      fullPath: '/rdv-gratuit'
+      preLoaderRoute: typeof RdvGratuitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/session-gratuite': {
       id: '/session-gratuite'
       path: '/session-gratuite'
@@ -65,12 +210,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SessionGratuiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/formations/': {
+      id: '/formations/'
+      path: '/formations'
+      fullPath: '/formations/'
+      preLoaderRoute: typeof FormationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/formations/$id': {
+      id: '/formations/$id'
+      path: '/formations/$id'
+      fullPath: '/formations/$id'
+      preLoaderRoute: typeof FormationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$id': {
+      id: '/services/$id'
+      path: '/services/$id'
+      fullPath: '/services/$id'
+      preLoaderRoute: typeof ServicesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EvenementsRoute: EvenementsRoute,
+  NajehRoute: NajehRoute,
+  RdvGratuitRoute: RdvGratuitRoute,
   SessionGratuiteRoute: SessionGratuiteRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  FormationsIdRoute: FormationsIdRoute,
+  ServicesIdRoute: ServicesIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  FormationsIndexRoute: FormationsIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
