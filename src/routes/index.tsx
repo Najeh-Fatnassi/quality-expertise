@@ -930,7 +930,11 @@ function Footer() {
           </p>
           <div className="mt-5 flex gap-2">
             {[
-              { icon: Linkedin, href: "#", label: "LinkedIn" },
+              {
+                icon: Linkedin,
+                href: "https://fr.linkedin.com/in/najeh-fatnassi-55a6901a3",
+                label: "LinkedIn",
+              },
               { icon: Facebook, href: "#", label: "Facebook" },
               { icon: Instagram, href: "#", label: "Instagram" },
               { icon: MapPin, href: MAPS_URL, label: "Google Maps — Jawhara, Sousse" },

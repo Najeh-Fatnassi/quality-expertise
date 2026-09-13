@@ -11,4 +11,7 @@ export const resultStats: ResultStat[] = [
   { label: "Sessions live organisées", value: "—" },
 ];
 
-export const communityUrl = "";
+// Discussion WhatsApp directe en attendant la création d'un vrai groupe/communauté.
+export const communityUrl =
+  "https://wa.me/21627730227?text=" +
+  encodeURIComponent("Bonjour, je souhaite rejoindre la communauté Quality Expertise.");

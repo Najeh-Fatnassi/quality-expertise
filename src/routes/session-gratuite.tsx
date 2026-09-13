@@ -941,7 +941,12 @@ function LandingPageContent() {
             >
               <Mail className="h-4 w-4" /> najeh@qualityexpertise.eu
             </a>
-            <a href="#" className="flex items-center gap-2 transition hover:text-white">
+            <a
+              href="https://fr.linkedin.com/in/najeh-fatnassi-55a6901a3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition hover:text-white"
+            >
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
             <a

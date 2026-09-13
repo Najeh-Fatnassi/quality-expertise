@@ -7,8 +7,7 @@ import avatar from "@/assets/avatar.jpg";
 import { buildMeta, canonical, WHATSAPP_URL } from "@/lib/seo";
 
 const PROFILE_URL = canonical("/najeh");
-// TODO: remplacer par la vraie URL du profil LinkedIn.
-const LINKEDIN_URL = "#";
+const LINKEDIN_URL = "https://fr.linkedin.com/in/najeh-fatnassi-55a6901a3";
 
 export const Route = createFileRoute("/najeh")({
   head: () =>
