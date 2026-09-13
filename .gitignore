@@ -1,0 +1,6 @@
+.vercel
+.env*
+deployments.json
+project_info.json
+filetree.json
+.download-source.js
