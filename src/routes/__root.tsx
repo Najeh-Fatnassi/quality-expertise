@@ -75,7 +75,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    const { meta, links } = buildMeta({
+    // Only `meta` from buildMeta is used here — TanStack Router merges/overrides
+    // `meta` entries by name/property across the route tree, but concatenates
+    // `links` verbatim. Emitting the canonical `link` here as well would leave
+    // two conflicting <link rel="canonical"> tags on every child route.
+    const { meta } = buildMeta({
       title: "Quality Expertise — Formation ISTQB & Coaching QA",
       description:
         "Formation et coaching QA en ligne : ISTQB Foundation Level v4.0 (GenAI), master classes en automatisation IA, coaching de carrière 1:1.",
@@ -89,7 +93,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         ...meta,
       ],
       links: [
-        ...links,
         {
           rel: "stylesheet",
           href: appCss,
